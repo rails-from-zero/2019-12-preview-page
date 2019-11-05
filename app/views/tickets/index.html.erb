@@ -1,0 +1,10 @@
+<p><%= link_to "New support ticket", [:new, :ticket] %></p>
+
+<% @tickets.each do |ticket| %>
+  <article>
+    <h3>
+      <%= link_to ticket.title, ticket %>
+    </h3>
+    <p>Reported by <strong><%= ticket.reporter %></strong>, <%= distance_of_time_in_words_to_now(ticket.created_at) %> ago</p>
+  </article>
+<% end %>

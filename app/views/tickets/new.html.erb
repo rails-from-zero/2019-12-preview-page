@@ -1,0 +1,18 @@
+<h3>New support ticket</h3>
+<p><%= link_to "Go back", :root %></p>
+
+<% if @ticket.errors.any? %>
+  <ul class="errors">
+    <% @ticket.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @ticket do |f| %>
+  <p><%= f.text_field :title, placeholder: "Title" %></p>
+  <p><%= f.text_area :description, placeholder: "Description" %></p>
+  <p><%= f.text_field :reporter, placeholder: "Your name" %></p>
+
+  <p><%= f.submit "Save" %></p>
+<% end %>

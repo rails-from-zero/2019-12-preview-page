@@ -1,0 +1,24 @@
+<article>
+  <h3>
+    <%= @ticket.title %>
+  </h3>
+  <p>Reported by <strong><%= @ticket.reporter %></strong>, <%= distance_of_time_in_words_to_now(@ticket.created_at) %> ago</p>
+  <div class="description"><%= markdown @ticket.description %></div>
+</article>
+
+<section id="comments">
+  <% @ticket.comments.each do |comment| %>
+    <article>
+      <p><%= comment.name %> said:</p>
+      <p><%= comment.body %></p>
+    </article>
+  <% end %>
+</section>
+
+<br />
+
+<%= form_for [@ticket, Comment.new] do |f| %>
+  <p><%= f.text_field :name, placeholder: "Your name" %></p>
+  <p><%= f.text_area :body, placeholder: "Comment" %></p>
+  <p><%= f.submit "Save" %></p>
+<% end %>
