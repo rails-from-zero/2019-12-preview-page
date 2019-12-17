@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: "tickets#index"
 
   resources :tickets do
+    post :preview, on: :collection
+
     resources :comments
   end
 end

@@ -1,0 +1,24 @@
+<p>
+  <%= link_to "Back", new_ticket_path(ticket: ticket_params)%>
+</p>
+
+<article>
+  <h3>
+    <%= @ticket.title %>
+  </h3>
+  <p>Reported by <strong><%= @ticket.reporter %></strong>, <%= distance_of_time_in_words_to_now(Time.now) %> ago</p>
+  <div class="description"><%= markdown @ticket.description %></div>
+</article>
+
+<%= form_for @ticket do |f| %>
+  <%= f.hidden_field :title %>
+  <%= f.hidden_field :description %>
+  <%= f.hidden_field :reporter %>
+  <%= f.hidden_field :require_terms_of_service, value: 1 %>
+  <p>
+    <%= f.check_box :terms_of_service %>
+    <%= f.label :terms_of_service, "I agree with the terms of service" %>
+  </p>
+
+  <p><%= f.submit "Create" %></p>
+<% end %>
